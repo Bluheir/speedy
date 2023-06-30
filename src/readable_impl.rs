@@ -564,6 +564,7 @@ impl<'a, C, const N : usize, T> Readable<'a, C> for [T; N] where C: Context, T: 
                         // Prevent memory leaks by dropping initialised memory
                         drop_in_place(&mut array[..i] as *mut _ as *mut [T]); 
                     }
+                    mem::forget(array);
 
                     return Err(error)
                 },
